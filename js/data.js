@@ -1,25 +1,6 @@
-/**
- * data.js - Data Loading and Case Generation Module
- * 
- * This module handles loading census tract data from the Opportunity Atlas CSV
- * and generating random case profiles for the economic mobility prediction game.
- * 
- * Dependencies:
- *   - PapaParse library for CSV parsing
- * 
- * Exports (Global Functions):
- *   - loadAtlasData(): Loads and parses the atlas CSV data
- *   - getAvatarImage(gender, race): Returns avatar image filename
- *   - pickRandomCase(atlasData): Generates a random case profile
- *   - debugCaseProfile(): Debug utility for localStorage inspection
- */
+// data.js - COMPLETE FILE
 
-/**
- * Loads the Opportunity Atlas CSV data and makes it available for use.
- * 
- * @async
- * @returns {Promise<Array>} Array of census tract objects, filtered for valid entries
- */
+// Load the Opportunity Atlas CSV and make it usable by all pages
 async function loadAtlasData() {
     try {
         const response = await fetch("data/atlas.csv");
@@ -29,7 +10,7 @@ async function loadAtlasData() {
         const text = await response.text();
         const rows = Papa.parse(text, { header: true }).data;
 
-        // Filter out empty rows - only keep rows with valid tract names
+        // Filter out empty rows
         return rows.filter(row => row.tract_name && row.tract_name.trim() !== '');
     } catch (error) {
         console.error("Error loading atlas data:", error);
@@ -37,13 +18,7 @@ async function loadAtlasData() {
     }
 }
 
-/**
- * Maps gender and race combination to the corresponding avatar image filename.
- * 
- * @param {string} gender - "Male" or "Female"
- * @param {string} race - "White", "Black", "Hispanic", "Asian", or "Native American"
- * @returns {string} Avatar image filename (e.g., "avatar_male_white.png")
- */
+// Get avatar image based on gender and race
 function getAvatarImage(gender, race) {
     const avatarMap = {
         "Male_White": "avatar_male_white.png",
@@ -60,37 +35,10 @@ function getAvatarImage(gender, race) {
     };
 
     const key = `${gender}_${race}`;
-    return avatarMap[key] || "pixel_character.png";
+    return avatarMap[key] || "pixel_character.png"; // fallback
 }
 
-/**
- * Generates a random case profile from the atlas data.
- * Picks a random census tract and assigns random demographics,
- * then calculates the mobility outcome based on available data.
- * 
- * @param {Array} atlasData - Array of census tract objects from loadAtlasData()
- * @returns {Object|null} Case profile object with all relevant fields, or null on error
- * 
- * Case Profile Structure:
- *   - county: County/commuting zone name
- *   - stateFIPS: State FIPS code
- *   - countyFIPS: County FIPS code
- *   - race: Selected race
- *   - gender: Selected gender
- *   - mobilityOutcome: Mobility percentile (0-100)
- *   - avatarImage: Avatar image filename
- *   - areaType: "Urban", "Suburban", or "Rural"
- *   - parentIncomeLevel: "Low Income", "Middle Income", or "High Income"
- *   - parentIncomeBracket: Income bracket description
- *   - parentEducation: "High School", "Some College", or "College Degree"
- *   - collegeRate: College attendance rate as percentage string
- *   - povertyRate: Poverty rate as percentage string
- *   - locationContext: Descriptive text about location
- *   - familyContext: Descriptive text about family economics
- *   - communityContext: Descriptive text about community education
- *   - popDensity: Population density value
- *   - medianIncome: Formatted median income string
- */
+// In data.js - COMPLETE REPLACEMENT
 function pickRandomCase(atlasData) {
     if (!atlasData || atlasData.length === 0) {
         console.error("No atlas data available");
@@ -99,16 +47,17 @@ function pickRandomCase(atlasData) {
 
     // Pick a random census tract
     const caseRow = atlasData[Math.floor(Math.random() * atlasData.length)];
-    console.log("Selected census tract:", caseRow.tract_name);
+    
+    console.log("📍 Selected census tract:", caseRow.tract_name);
 
-    // Define demographic options and randomly select
+    // Randomize demographics
     const races = ["White", "Black", "Hispanic", "Asian", "Native American"];
     const genders = ["Male", "Female"];
 
     const race = races[Math.floor(Math.random() * races.length)];
     const gender = genders[Math.floor(Math.random() * genders.length)];
 
-    // Map race to column key format used in the CSV
+    // Map race AND gender to correct mobility column
     const raceKeyMap = {
         "White": "white",
         "Black": "black",
@@ -117,12 +66,13 @@ function pickRandomCase(atlasData) {
         "Native American": "natam"
     };
     
-    const genderKey = gender.toLowerCase();
+    const genderKey = gender.toLowerCase(); // "male" or "female"
     const raceKey = raceKeyMap[race];
     
-    // Build the correct column name for mobility data: kfr_{race}_{gender}_p25
+    // Build the correct column name: kfr_{race}_{gender}_p25
     const mobilityColumn = `kfr_${raceKey}_${genderKey}_p25`;
-    console.log(`Looking for column: ${mobilityColumn} for ${race} ${gender}`);
+    
+    console.log(`🔍 Looking for column: ${mobilityColumn} for ${race} ${gender}`);
 
     // Extract raw mobility value (already 0-100 percentile)
     let mobilityValue = parseFloat(caseRow[mobilityColumn]);
@@ -132,23 +82,24 @@ function pickRandomCase(atlasData) {
         // Try pooled gender for this race
         const pooledRaceColumn = `kfr_${raceKey}_pooled_p25`;
         mobilityValue = parseFloat(caseRow[pooledRaceColumn]);
-        console.log(`Fallback to pooled race: ${pooledRaceColumn} = ${mobilityValue}`);
+        console.log(`⚠️ Fallback to pooled race: ${pooledRaceColumn} = ${mobilityValue}`);
     }
     
     if (isNaN(mobilityValue) || mobilityValue === 0) {
         // Final fallback: overall pooled
         mobilityValue = parseFloat(caseRow["kfr_pooled_pooled_p25"]);
-        console.log(`Final fallback to pooled_pooled: ${mobilityValue}`);
+        console.log(`⚠️ Final fallback to pooled_pooled: ${mobilityValue}`);
     }
     
     if (isNaN(mobilityValue)) {
         mobilityValue = 35; // Safe default if all else fails
-        console.error("Could not find valid mobility data, using default: 35");
+        console.error("❌ Could not find valid mobility data, using default: 35");
     }
 
     // Ensure value is in valid range
     mobilityValue = Math.max(0, Math.min(100, mobilityValue));
-    console.log(`Final mobility value: ${mobilityValue.toFixed(1)}`);
+
+    console.log(`✅ Final mobility value: ${mobilityValue.toFixed(1)}`);
 
     // Extract contextual data from census tract
     const popDensity = parseFloat(caseRow["popdensity2010"]) || 0;
@@ -158,13 +109,10 @@ function pickRandomCase(atlasData) {
     
     // Determine area type based on population density
     let areaType = "Rural";
-    if (popDensity > 3000) {
-        areaType = "Urban";
-    } else if (popDensity > 500) {
-        areaType = "Suburban";
-    }
+    if (popDensity > 3000) areaType = "Urban";
+    else if (popDensity > 500) areaType = "Suburban";
     
-    // Determine parent income level based on median household income
+    // Determine parent income level
     let parentIncomeLevel = "Low Income";
     let parentIncomeBracket = "bottom 25%";
     if (medianIncome > 60000) {
@@ -175,15 +123,12 @@ function pickRandomCase(atlasData) {
         parentIncomeBracket = "middle 50%";
     }
     
-    // Determine parent education estimate based on college rate
+    // Determine parent education estimate
     let parentEducation = "High School";
-    if (collegeRate > 0.35) {
-        parentEducation = "College Degree";
-    } else if (collegeRate > 0.20) {
-        parentEducation = "Some College";
-    }
+    if (collegeRate > 0.35) parentEducation = "College Degree";
+    else if (collegeRate > 0.20) parentEducation = "Some College";
     
-    // Create contextual insight strings
+    // Create contextual insights
     const locationContext = popDensity > 3000 
         ? "Grew up in a densely populated urban area with more job opportunities but higher competition."
         : popDensity > 500
@@ -202,14 +147,13 @@ function pickRandomCase(atlasData) {
         ? "Mixed educational outcomes in the community, with some attending college."
         : "Few residents attend college, potentially limiting exposure to higher education pathways.";
 
-    // Assemble the complete case profile object
     const caseProfile = {
         county: caseRow["czname"] || caseRow["tract_name"] || "Unknown County",
         stateFIPS: caseRow["state"] || "00",
         countyFIPS: caseRow["county"] || "000",
         race,
         gender,
-        mobilityOutcome: mobilityValue,
+        mobilityOutcome: mobilityValue, // ✅ CRITICAL: Store as number
         avatarImage: getAvatarImage(gender, race),
         
         // Contextual fields
@@ -226,17 +170,14 @@ function pickRandomCase(atlasData) {
         medianIncome: "$" + Math.round(medianIncome).toLocaleString()
     };
 
-    console.log("Generated case profile:", caseProfile);
-    console.log("Mobility outcome type:", typeof caseProfile.mobilityOutcome);
-    console.log("Mobility outcome value:", caseProfile.mobilityOutcome);
+    console.log("📦 Generated case profile:", caseProfile);
+    console.log("📊 Mobility outcome type:", typeof caseProfile.mobilityOutcome);
+    console.log("📊 Mobility outcome value:", caseProfile.mobilityOutcome);
     
     return caseProfile;
 }
+// Add this temporary debug function to main.js to test localStorage
 
-/**
- * Debug utility function to inspect the current case profile stored in localStorage.
- * Call this from browser console to diagnose data storage issues.
- */
 function debugCaseProfile() {
     console.log("=== DEBUG CASE PROFILE ===");
     const stored = localStorage.getItem('currentCase');
@@ -251,3 +192,5 @@ function debugCaseProfile() {
         console.log("Nothing in localStorage!");
     }
 }
+
+// Call this in browser console after navigating to screen 3

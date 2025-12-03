@@ -1,43 +1,4 @@
 /**
- * viz-loader.js - Plotly Visualization Loader
- * 
- * This module loads census tract data and generates advanced Plotly
- * visualizations including Sankey diagrams, correlation heatmaps,
- * and treemaps to explore economic mobility patterns.
- * 
- * Dependencies:
- *   - PapaParse for CSV parsing
- *   - Plotly.js for visualization rendering
- * 
- * Visualizations:
- *   1. Sankey Diagram: Shows mobility flow through poverty->race->education
- *   2. Correlation Heatmap: Shows relationships between socioeconomic factors
- *   3. Treemap: Hierarchical view of population segments by income and education
- * 
- * Key Functions:
- *   - initializeVisualizations(): Entry point, loads data and creates all charts
- *   - loadCSVAndCreateVisualizations(): Main data loading and processing
- *   - createSankeyVisualization(): Builds flow diagram
- *   - createHeatmapVisualization(): Builds correlation matrix
- *   - createTreemapVisualization(): Builds hierarchical chart
- * 
- * Helper Functions:
- *   - categorizePoverty(poorShare): Classifies poverty level
- *   - categorizeRace(row): Determines dominant race in tract
- *   - categorizeEducation(fracColl): Classifies education level
- *   - createSegment(poverty, education): Creates segment label
- *   - calculateCorrelation(x, y): Computes Pearson correlation
- *   - getMobilityColor(mobility): Returns color based on mobility score
- * 
- * Color Scheme:
- *   - Low mobility: Red/crimson tones
- *   - Medium mobility: Orange/amber tones
- *   - High mobility: Green tones
- * 
- * @author Economic Mobility Project Team
- * @version 1.0.0
- */
-
  * viz-loader.js
  * Loads CSV data and generates Plotly visualizations dynamically
  * This replaces the iframe approach with data-driven visualizations

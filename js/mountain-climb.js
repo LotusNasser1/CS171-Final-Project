@@ -1,43 +1,4 @@
-/**
- * mountain-climb.js - Mountain Climb Race Visualization
- * 
- * This module creates an animated mountain climbing race that visualizes
- * economic mobility differences. Users can set up opponents with different
- * demographics and watch them race up a mountain at speeds proportional
- * to their mobility rates.
- * 
- * Dependencies:
- *   - HTML5 Canvas for rendering
- *   - AvatarIntegration module for avatar data
- * 
- * Features:
- *   - Animated mountain climbing race
- *   - User avatar vs up to 3 AI opponents
- *   - Opponent customization: state, city, race, education, gender
- *   - Speed based on calculated mobility rates
- *   - Obstacle interactions that slow lower-mobility racers more
- *   - Winner overlay with mobility bar comparison
- *   - Scenic mountain background with sun and clouds
- * 
- * Key Classes:
- *   - MountainClimb: Main controller for race setup and animation
- *   - Racer: Individual racer with physics and rendering
- * 
- * Mobility Rate Calculation:
- *   Uses pre-calculated rates based on race-education-gender combinations
- *   Higher mobility rate = faster climbing speed
- *   Lower mobility racers are more affected by obstacles
- * 
- * Animation System:
- *   - requestAnimationFrame for smooth animation
- *   - Delta-time based movement for consistent speed
- *   - Trail effects for visual tracking
- *   - Jump animations when encountering obstacles
- * 
- * @author Economic Mobility Project Team
- * @version 1.0.0
- */
-
+// Mountain Climb Race - Improved Climbing Visualization
 // - Linked state/city selects (state first, then city)
 // - Defaults to avatar's city/state
 // - Mountain fully connected on the right side

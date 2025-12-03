@@ -1,46 +1,4 @@
-/**
- * mobility-explorer.js - Mobility Explorer Tab View Module
- * 
- * This module provides a comprehensive tabbed interface for exploring economic
- * mobility data across US states. Users can view state overviews, compare
- * mobility by race, examine family structure impacts, and analyze education
- * correlations.
- * 
- * Dependencies:
- *   - D3.js v7 for data aggregation
- *   - PapaParse for CSV parsing
- *   - CoordinatedDashboard (optional) for shared data
- * 
- * Features:
- *   - Five exploration tabs: Overview, Race, Family, Education, Compare
- *   - State selector dropdown with all US states
- *   - Beginner-friendly tooltips explaining metrics
- *   - Up/down arrows indicating performance vs national average
- *   - Side-by-side state comparison functionality
- *   - Discovery cards for guided exploration
- *   - Rural vs Urban mobility comparison
- *   - State rankings by various metrics
- * 
- * Key Object:
- *   - MobilityExplorer: Main controller with tab rendering and data processing
- * 
- * Data Processing:
- *   - Aggregates census tract data to state level
- *   - Calculates mobility rates by race, income, education
- *   - Computes national averages for comparison
- *   - Requires minimum 50 valid tracts per state
- * 
- * Tab Content:
- *   - Overview: Overall mobility score, percentile ranking, key factors
- *   - Race: Mobility breakdown by racial group with gap analysis
- *   - Family: Single-parent rate impact, poverty correlation
- *   - Education: College rate, math scores, education-mobility link
- *   - Compare: Side-by-side state comparison with metrics
- * 
- * @author Economic Mobility Project Team
- * @version 1.0.0
- */
-
+// ============================================
 // MOBILITY EXPLORER - Integrated Tab View
 // Final Version with All UI/UX Improvements
 // ============================================
@@ -326,7 +284,6 @@ const MobilityExplorer = {
           </div>
           <div class="rank-info">Ranked <strong>#${r.rank}</strong> of ${r.total} states</div>
           <p class="explain-text">Children from low-income families in ${this.selectedState} reach the <strong>${st.mobility?.toFixed(0)}th percentile</strong> of national income as adults on average.</p>
-          ${r.total === 51 ? '<p class="data-note" style="font-size: 11px; color: #6c3a4d; margin-top: 10px; font-style: italic;">Note: Includes 50 states plus the District of Columbia</p>' : ''}
         </div>
         
         <div class="explorer-card">

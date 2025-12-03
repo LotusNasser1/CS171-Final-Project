@@ -1,47 +1,4 @@
-/**
- * main.js - Main Application Controller
- * 
- * This is the primary controller for the Economic Mobility Explorer single-page application.
- * It manages all screen rendering, navigation, user interactions, and coordinates between
- * different visualization modules.
- * 
- * Dependencies:
- *   - D3.js v7 for data visualization
- *   - PapaParse for CSV parsing
- *   - data.js for data loading functions
- *   - avatar-integration.js for avatar builder
- *   - mountains.js for mountain visualization
- * 
- * Application Screens (in order):
- *   1. Landing Screen - Animated title and start button
- *   2. Intro Story - Context setting narrative
- *   3. What Is Screen - Explains economic mobility concept
- *   4. Mountain Intro - Introduces the fading American Dream
- *   5. Mountain Screen - Interactive prediction visualization
- *   6. Case Intro - Introduces the case study approach
- *   7. Instruction Screen - Step-by-step guide
- *   8. Meet Case Screen - Display random case profile
- *   9. Prediction Screen - Speedometer-based prediction
- *   10. Dashboard Screen - Data exploration dashboard
- *   11. Forces Intro - Factors affecting mobility
- *   12. Avatar Builder - Custom scenario builder
- *   13. Closing Reflection - Summary and resources
- * 
- * Key Objects:
- *   - App: Main application controller with screen rendering methods
- *   - MeetCase: Context exploration panel controller
- * 
- * Global Functions:
- *   - scrollToScreen(screenId): Smooth scroll navigation
- *   - shareResults(): Social sharing functionality
- *   - spawnPixelRunners(): Animated background characters
- *   - initScrollIndicator(): Navigation dot indicator
- *   - renderEconomicMobilityExplorer(): Economic mobility grid visualization
- * 
- * @author Economic Mobility Project Team
- * @version 1.0.0
- */
-
+// Smooth scroll
 function scrollToScreen(screenId) {
     // Handle both number and string inputs
     let targetScreen;
@@ -1895,7 +1852,7 @@ renderMountainScreen: function () {
                 <button id="reset-mountains-btn" class="mountain-button secondary">
                     TRY AGAIN
                 </button>
-                <button id="next-screen-btn" class="mountain-button" style="display: none;" onclick="scrollToScreen('case-intro')">
+                <button id="next-screen-btn" class="mountain-button" style="display: none;" onclick="scrollToScreen(9)">
                     Continue Exploring →
                 </button>
             </div>
@@ -2798,21 +2755,13 @@ function initScrollIndicator() {
 
     // Debounced scroll handler for better performance
     let scrollTimer = null;
-    let ticking = false;
-    
     window.addEventListener("scroll", () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                if (scrollTimer !== null) {
-                    clearTimeout(scrollTimer);
-                }
-                scrollTimer = setTimeout(() => {
-                    updateActiveDot();
-                }, 100);
-                ticking = false;
-            });
-            ticking = true;
+        if (scrollTimer !== null) {
+            clearTimeout(scrollTimer);
         }
+        scrollTimer = setTimeout(() => {
+            updateActiveDot();
+        }, 50);
     }, { passive: true });
 
     // Also update on resize

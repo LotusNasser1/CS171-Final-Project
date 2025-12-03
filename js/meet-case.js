@@ -1,18 +1,3 @@
-/**
- * meet-case.js - Standalone Case Meeting Page Controller
- * 
- * This module initializes the standalone "Meet Case" page, loading atlas data
- * and generating a random case profile for users to explore. It populates
- * the UI with case information and stores the profile for the prediction phase.
- * 
- * Dependencies:
- *   - data.js: loadAtlasData(), pickRandomCase()
- *   - DOM elements for displaying case information
- * 
- * Note: This is used for the standalone meet-case.html page.
- * The main single-page app uses the renderMeetCaseScreen() function in main.js.
- */
-
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         console.log("Loading atlas data...");
@@ -33,10 +18,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        // Save in browser memory for next page (prediction phase)
+        // Save in browser memory for next page
         localStorage.setItem("currentCase", JSON.stringify(caseProfile));
 
-        // State FIPS to Name mapping for display
+        // Convert State FIPS → State Name
         const stateNames = {
             "01": "Alabama", "02": "Alaska", "04": "Arizona", "05": "Arkansas",
             "06": "California", "08": "Colorado", "09": "Connecticut",
@@ -55,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             "55": "Wisconsin", "56": "Wyoming"
         };
 
-        // Set avatar image with background-image style
+        // Set avatar image
         const avatarPhoto = document.getElementById("avatar-photo");
         if (avatarPhoto) {
             avatarPhoto.style.backgroundImage = `url('../asset/${caseProfile.avatarImage}')`;
@@ -63,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             avatarPhoto.style.backgroundPosition = 'center';
         }
 
-        // Fill UI fields with case profile data
+        // Fill UI fields
         document.getElementById("county-name").textContent = caseProfile.county;
         document.getElementById("state-name").textContent =
             stateNames[String(caseProfile.stateFIPS).padStart(2, "0")] || caseProfile.stateFIPS;

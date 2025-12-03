@@ -8,8 +8,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
-    /* Removed scroll-behavior: smooth to improve performance */
-    /* Smooth scrolling is handled by scrollIntoView({ behavior: "smooth" }) */
+    scroll-behavior: smooth;
 }
 
 .screen {
@@ -21,10 +20,6 @@ body {
     padding: 2rem;
     position: relative;
     z-index: 1;
-    /* Performance optimizations */
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
 }
 
 /* Screen Backgrounds */
@@ -58,9 +53,6 @@ p {
     pointer-events: none;
     overflow: hidden;
     z-index: 0;
-    /* Performance optimizations */
-    will-change: auto;
-    transform: translateZ(0);
 }
 
 .pixel-runner {
@@ -71,9 +63,6 @@ p {
     background-size: contain;
     background-repeat: no-repeat;
     animation: runAcross 12s linear infinite;
-    /* GPU acceleration */
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 .floating-shape {
@@ -81,9 +70,6 @@ p {
     pointer-events: none;
     animation: floatDown 12s linear infinite;
     font-weight: bold;
-    /* GPU acceleration */
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 @keyframes runAcross {
