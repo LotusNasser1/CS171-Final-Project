@@ -1,0 +1,421 @@
+/* Screen 2 - Instructions */
+
+.pixel-game-frame {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 18px;
+    background: #E4DFD8;
+    border: 10px solid #A45334;
+    box-shadow:
+        0 0 0 6px #B8796B,
+        0 0 0 10px #E6DCC4;
+    image-rendering: pixelated;
+    position: relative;
+}
+
+.pixel-game-frame::before,
+.pixel-game-frame::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #A45334;
+}
+
+.pixel-game-frame::before {
+    top: -10px;
+    left: -10px;
+}
+
+.pixel-game-frame::after {
+    bottom: -10px;
+    right: -10px;
+}
+
+.pixel-frame-header {
+    background: #B8796B;
+    border: 4px solid #6B3A2D;
+    padding: 10px;
+    text-align: center;
+    font-family: "Press Start 2P", monospace;
+    font-size: 16px;
+    color: #fff;
+    box-shadow:
+        inset -4px -4px 0 #00000055,
+        inset 4px 4px 0 #ffffff55;
+}
+
+.pixel-frame-inner {
+    background: #F4E8E2;
+    border: 6px solid #A45334;
+    margin-top: 18px;
+    padding: 60px;
+    box-shadow:
+        inset -6px -6px 0 #ffffff66,
+        inset 6px 6px 0 #00000033;
+}
+
+/* Layout wrapper for text and progress bar side-by-side */
+.instruction-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.instruction-left {
+    flex: 1;
+    max-width: 60%;
+}
+
+.instruction-right {
+    flex: 0 0 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instruction-text {
+    font-family: "Press Start 2P", monospace;
+    font-size: 14px;
+    color: #6c3a4d;
+    min-height: 120px;
+    line-height: 1.8;
+    opacity: 0;
+    transition: opacity .3s ease-out;
+}
+
+.instruction-text.fade-in {
+    opacity: 1;
+}
+
+/* Progress Bar */
+.pixel-progress-container {
+    width: 100%;
+    height: 60px;
+    border: 4px solid #8b4560;
+    background: #ffb6c9;
+    padding: 6px;
+    box-shadow:
+        inset -4px -4px 0 #ffffff66,
+        inset 4px 4px 0 #00000055;
+}
+
+.pixel-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: repeating-linear-gradient(
+        90deg,
+        #6b1a2e,
+        #6b1a2e 8px,
+        #2b0c14 8px,
+        #2b0c14 16px
+    );
+    transition: width .4s steps(4);
+}
+
+/* Button container - centered */
+.instruction-button-container {
+    text-align: center;
+}
+
+/* Override button margin for this screen */
+.pixel-frame-inner .pixel-button {
+    margin-top: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pixel-frame-inner {
+        padding: 30px;
+    }
+    
+    .instruction-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .instruction-left {
+        max-width: 100%;
+    }
+    
+    .instruction-right {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    
+    .instruction-text {
+        font-size: 12px;
+        min-height: 80px;
+    }
+}
+
+/* Instruction Progress Bar */
+.instruction-progress-container {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background: #ffb6c9;
+    border: 4px solid #8b4560;
+    border-radius: 8px;
+    margin-bottom: 35px;
+    padding: 8px;
+    box-shadow: inset -4px -4px 0 #ffffff66, inset 4px 4px 0 #00000055;
+}
+
+.instruction-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: repeating-linear-gradient(
+        90deg,
+        #8b4560,
+        #8b4560 8px,
+        #6c3a4d 8px,
+        #6c3a4d 16px
+    );
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+
+.progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Press Start 2P';
+    font-size: 17px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+}
+
+/* Instruction Slides */
+.instruction-slide {
+    display: none;
+    min-height: 400px;
+    opacity: 0;
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.instruction-slide.active {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mission Content (Slide 0) */
+.mission-content {
+    background: #ffe3d8;
+    border: 4px solid #8b4560;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: inset -4px -4px 0 #ffffff66, inset 4px 4px 0 #00000055;
+}
+
+.mission-title {
+    font-family: 'Press Start 2P';
+    font-size: 18px;
+    color: #4d1f2f;
+    margin-bottom: 25px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.mission-text {
+    font-family: 'Press Start 2P';
+    font-size: 12px;
+    line-height: 2;
+    color: #6c3a4d;
+    margin-bottom: 25px;
+}
+
+.mission-highlight {
+    background: #ffb6c9;
+    border: 3px solid #8b4560;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    line-height: 1.8;
+    color: #4d1f2f;
+    box-shadow: inset -3px -3px 0 #ffffff88, inset 3px 3px 0 #00000055;
+}
+
+.slide-content {
+    background: #fff5e1;
+    border: 4px solid #8b4560;
+    padding: 50px 40px 40px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    box-shadow: inset -4px -4px 0 #ffffff66, inset 4px 4px 0 #00000055;
+}
+
+.slide-visual {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.step-icon-large {
+    width: 85px;
+    height: 85px;
+    image-rendering: pixelated;
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.pixel-avatar-preview {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #8b4560 0%, #d75b87 100%);
+    border: 4px solid #6c3a4d;
+    border-radius: 8px;
+    box-shadow: 
+        inset -4px -4px 0 #ffffff33,
+        inset 4px 4px 0 #00000033;
+    position: relative;
+    animation: avatarPulse 2s ease-in-out infinite;
+}
+
+.pixel-avatar-preview::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+    background: #fff5e1;
+    border-radius: 4px;
+}
+
+@keyframes avatarPulse {
+    0%, 100% {
+        box-shadow: 
+            inset -4px -4px 0 #ffffff33,
+            inset 4px 4px 0 #00000033,
+            0 0 0 0 rgba(215, 91, 135, 0);
+    }
+    50% {
+        box-shadow: 
+            inset -4px -4px 0 #ffffff33,
+            inset 4px 4px 0 #00000033,
+            0 0 0 12px rgba(215, 91, 135, 0.3);
+    }
+}
+
+.slide-title {
+    font-family: 'Press Start 2P';
+    font-size: 16px;
+    color: #8b4560;
+    margin-bottom: 20px;
+}
+
+.slide-description {
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+    line-height: 2;
+    color: #6c3a4d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Navigation Buttons */
+.instruction-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 35px;
+}
+
+.nav-btn {
+    font-family: 'Press Start 2P';
+    padding: 15px 30px;
+    font-size: 12px;
+    background: #ffb6c9;
+    border: 4px solid #8b4560;
+    color: #4d1f2f;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 4px 0 #6c3a4d;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: #ff92b6;
+    transform: translateY(-2px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 6px 0 #6c3a4d;
+}
+
+.nav-btn:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 2px 0 #6c3a4d;
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.start-btn {
+    background: #d75b87;
+    color: white;
+    border-color: #8b4560;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slide-content {
+        padding: 40px 25px 25px;
+    }
+    
+    .instruction-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .nav-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,70 @@
+"SAINC1 State annual personal income summary: personal income, population, per capita personal income"
+"SAINC1 State annual personal income summary: personal income, population, per capita personal income"
+State or DC
+GeoFips,GeoName,2024
+00000,United States,73204
+01000,Alabama,57311
+02000,Alaska *,76234
+04000,Arizona,65798
+05000,Arkansas,59320
+06000,California,86232
+08000,Colorado,83055
+09000,Connecticut,95067
+10000,Delaware,68061
+11000,District of Columbia,111185
+12000,Florida,73006
+13000,Georgia,63006
+15000,Hawaii *,71019
+16000,Idaho,62323
+17000,Illinois,74522
+18000,Indiana,64077
+19000,Iowa,65225
+20000,Kansas,65856
+21000,Kentucky,58256
+22000,Louisiana,61897
+23000,Maine,68932
+24000,Maryland,79259
+25000,Massachusetts,93607
+26000,Michigan,63690
+27000,Minnesota,75603
+28000,Mississippi,52074
+29000,Missouri,64920
+30000,Montana,69240
+31000,Nebraska,72701
+32000,Nevada,69805
+33000,New Hampshire,83192
+34000,New Jersey,84893
+35000,New Mexico,58249
+36000,New York,85552
+37000,North Carolina,65634
+38000,North Dakota,71749
+39000,Ohio,64464
+40000,Oklahoma,63708
+41000,Oregon,70823
+42000,Pennsylvania,70678
+44000,Rhode Island,70622
+45000,South Carolina,60776
+46000,South Dakota,75699
+47000,Tennessee,66504
+48000,Texas,69823
+49000,Utah,67333
+50000,Vermont,71287
+51000,Virginia,77351
+53000,Washington,85187
+54000,West Virginia,55351
+55000,Wisconsin,67755
+56000,Wyoming,86477
+91000,New England,88146
+92000,Mideast,80784
+93000,Great Lakes,67340
+94000,Plains,69319
+95000,Southeast,66242
+96000,Southwest,68045
+97000,Rocky Mountain,74692
+98000,Far West *,83479
+
+Legend/Footnotes
+2. Per capita personal income is total personal income divided by total midyear population.
+* Estimates prior to 1950 are not available for Alaska and Hawaii.
+Note. All dollar estimates are in millions of current dollars (not adjusted for inflation). Calculations are performed on unrounded data.
+"  Last updated: September 26, 2025-- revised statistics for 2020-2024."

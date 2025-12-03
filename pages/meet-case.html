@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Your First Case</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <!-- CSV Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- Your Data & Logic Files -->
+    <script src="../js/data.js"></script>
+    <script src="../js/meet-case.js" defer></script>
+</head>
+
+<body class="pixel-bg">
+
+    <div class="pixel-id-card">
+
+        <!-- Header -->
+        <div class="pixel-id-header">
+            <span class="pixel-id-title">STATE IDENTIFICATION</span>
+        </div>
+
+        <!-- Body -->
+        <div class="pixel-id-body">
+
+            <!-- Avatar -->
+            <div id="avatar-photo" class="pixel-id-photo"></div>
+
+            <!-- Data Fields -->
+            <div class="pixel-id-fields">
+
+                <div class="pixel-row">
+                    <b>County:</b> <span id="county-name"></span>
+                </div>
+
+                <div class="pixel-row">
+                    <b>State:</b> <span id="state-name"></span>
+                </div>
+
+                <div class="pixel-row">
+                    <b>Race:</b> <span id="race"></span>
+                </div>
+
+                <div class="pixel-row">
+                    <b>Gender:</b> <span id="gender"></span>
+                </div>
+
+                <div class="pixel-row">
+                    <b>Education:</b> <span id="education"></span>
+                </div>
+
+                <div class="pixel-row">
+                    <b>Parental Income:</b> <span id="income"></span>
+                </div>
+
+                <div class="pixel-row">
+                    <b>Single Parent:</b> <span id="single-parent"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Button -->
+        <button onclick="window.location.href='prediction.html'" class="pixel-id-button">
+            Make Your Prediction →
+        </button>
+
+    </div>
+
+</body>
+</html>

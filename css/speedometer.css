@@ -1,0 +1,908 @@
+/* Replace speedometer.css with this improved version */
+
+/* Unified container */
+.prediction-unified-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.prediction-card {
+    width: 100%;
+    max-width: 1500px;
+    background: #fff5e1;
+    border: 8px solid #8b4560;
+    border-radius: 20px;
+    box-shadow: 
+        0px 0px 0px 4px #000,
+        0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.prediction-header {
+    background: #ffb6c9;
+    border-bottom: 4px solid #8b4560;
+    padding: 30px;
+    text-align: center;
+    box-shadow: inset -4px -4px 0 #ffffff88, inset 4px 4px 0 #00000055;
+}
+
+.prediction-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 22px;
+    color: #4d1f2f;
+    letter-spacing: 2px;
+}
+
+.prediction-content {
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Left panel */
+.prediction-left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* Question box - clearer hierarchy */
+.prediction-question-box {
+    background: linear-gradient(135deg, #ffe3d8 0%, #fff5e1 100%);
+    border: 4px solid #d75b87;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 
+        0 4px 12px rgba(139, 69, 96, 0.15),
+        inset -3px -3px 0 #ffffff88, 
+        inset 3px 3px 0 #00000033;
+}
+
+.question-badge {
+    display: inline-block;
+    background: #d75b87;
+    color: white;
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.question-title {
+    font-family: 'Press Start 2P';
+    font-size: 18px;
+    line-height: 1.8;
+    color: #4d1f2f;
+    margin-bottom: 30px;
+}
+
+.question-explainer {
+    background: rgba(255, 255, 255, 0.6);
+    border: 3px solid #d4a5a5;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.explainer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.explainer-row.highlight {
+    background: rgba(215, 91, 135, 0.15);
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.explainer-label {
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    color: #9b7373;
+    flex-shrink: 0;
+}
+
+.explainer-value {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #4d1f2f;
+    text-align: right;
+}
+
+.explainer-divider {
+    text-align: center;
+    font-size: 24px;
+    color: #d75b87;
+    margin: 8px 0;
+}
+
+.scale-legend {
+    background: rgba(255, 182, 201, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.legend-item {
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    line-height: 2.2;
+    color: #6c3a4d;
+    margin: 8px 0;
+}
+
+.legend-item strong {
+    color: #d75b87;
+    font-size: 11px;
+}
+
+/* Example box */
+.example-box {
+    background: linear-gradient(135deg, #fff 0%, #fff5e1 100%);
+    border: 3px solid #8b4560;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: inset -3px -3px 0 #ffffff88, inset 3px 3px 0 #00000055;
+}
+
+.example-title {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #9b7373;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.example-text {
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    line-height: 2.2;
+    color: #6c3a4d;
+}
+
+.example-text strong {
+    color: #d75b87;
+    font-size: 11px;
+}
+
+/* Right panel - Speedometer */
+.prediction-right-panel {
+    background: linear-gradient(135deg, #ffffff 0%, #fff5e1 100%);
+    border: 4px solid #8b4560;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: inset -4px -4px 0 #ffffff88, inset 4px 4px 0 #00000055;
+    position: sticky;
+    top: 20px;
+}
+
+.speedometer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.interaction-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.interaction-title {
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+    color: #4d1f2f;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.interaction-subtitle {
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    color: #9b7373;
+    line-height: 2;
+}
+
+.speedometer-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 30px;
+    position: relative;
+    cursor: crosshair;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+#speedometer-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
+}
+
+#speedometer-needle {
+    pointer-events: all;
+    cursor: grab;
+}
+
+#speedometer-needle:active {
+    cursor: grabbing;
+}
+
+.scale-explanation {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid #d4a5a5;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.scale-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 12px 0;
+}
+
+.scale-color {
+    width: 30px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid #4d1f2f;
+    flex-shrink: 0;
+}
+
+.scale-text {
+    font-family: 'Press Start 2P';
+    font-size: 9px;
+    line-height: 1.8;
+    color: #6c3a4d;
+}
+
+.scale-text strong {
+    color: #4d1f2f;
+}
+
+/* Value display area */
+.value-display-area {
+    min-height: 180px;
+    position: relative;
+}
+
+.value-view {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+}
+
+.value-view.active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+    pointer-events: auto;
+}
+
+/* Prediction only view */
+.current-prediction {
+    background: linear-gradient(135deg, #ffe3d8 0%, #fff 100%);
+    border: 4px solid #8b4560;
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: inset -4px -4px 0 #ffffff88, inset 4px 4px 0 #00000055;
+}
+
+.value-label {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #9b7373;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.value-display-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.value-number {
+    font-family: 'Press Start 2P';
+    font-size: 72px;
+    color: #f39c12;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+}
+
+.value-context {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.percentile-label {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #9b7373;
+}
+
+.mobility-descriptor {
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    color: #6c3a4d;
+    line-height: 1.6;
+    max-width: 150px;
+}
+
+/* Comparison view */
+.comparison-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.comparison-box {
+    flex: 1;
+    padding: 30px 20px;
+    border: 4px solid #8b4560;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: inset -4px -4px 0 #ffffff88, inset 4px 4px 0 #00000055;
+}
+
+.guess-box {
+    background: linear-gradient(135deg, #ffe3d8 0%, #fff 100%);
+}
+
+.reality-box {
+    background: linear-gradient(135deg, #d4f1d4 0%, #e8f5e9 100%);
+    animation: reveal-pulse 0.6s ease-out;
+}
+
+@keyframes reveal-pulse {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.comparison-label {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #9b7373;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.comparison-number {
+    font-family: 'Press Start 2P';
+    font-size: 54px;
+    color: #4d1f2f;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.comparison-sublabel {
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    color: #9b7373;
+    margin-top: 8px;
+}
+
+.comparison-arrow {
+    font-size: 36px;
+    color: #d75b87;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.difference-badge {
+    background: #ffb6c9;
+    border: 3px solid #d75b87;
+    border-radius: 20px;
+    padding: 15px 25px;
+    text-align: center;
+    font-family: 'Press Start 2P';
+    font-size: 12px;
+    color: #4d1f2f;
+    margin: 0 auto;
+    box-shadow: inset -2px -2px 0 #ffffff66, inset 2px 2px 0 #00000055;
+}
+
+/* Feedback section */
+.feedback-section {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    background: linear-gradient(135deg, #fff5e1 0%, #fff 100%);
+    border: 4px solid #8b4560;
+    border-radius: 16px;
+    padding: 0;
+}
+
+.feedback-section.visible {
+    opacity: 1;
+    max-height: 400px;
+    padding: 30px;
+}
+
+.feedback-message {
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+    color: #4d1f2f;
+    margin-bottom: 20px;
+    line-height: 2;
+}
+
+.feedback-explanation {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #6c3a4d;
+    line-height: 2.2;
+    background: rgba(255, 182, 201, 0.2);
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid #d4a5a5;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prediction-action-btn {
+    font-family: 'Press Start 2P';
+    padding: 18px 36px;
+    font-size: 13px;
+    border: 4px solid #8b4560;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 6px 0 #6c3a4d;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.prediction-action-btn.primary {
+    background: #d75b87;
+    color: white;
+    animation: pulse-button 2s ease-in-out infinite;
+}
+
+.prediction-action-btn.secondary {
+    background: #ffb6c9;
+    color: #4d1f2f;
+}
+
+.prediction-action-btn.tertiary {
+    background: #D4A5A5;
+    color: white;
+}
+
+.prediction-action-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 8px 0 #6c3a4d;
+}
+
+.prediction-action-btn:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 4px 0 #6c3a4d;
+}
+
+.prediction-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.post-reveal-buttons {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.post-reveal-buttons.visible {
+    opacity: 1;
+    max-height: 300px;
+}
+
+@keyframes pulse-button {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .prediction-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .prediction-right-panel {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .prediction-content {
+        padding: 30px;
+    }
+    
+    .question-title {
+        font-size: 15px;
+    }
+    
+    .value-display-wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .value-context {
+        text-align: center;
+    }
+}
+
+/* Help Button - Pulsing indicator */
+.help-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #d75b87 0%, #ff92b6 100%);
+    border: 3px solid #8b4560;
+    border-radius: 50%;
+    color: white;
+    font-family: 'Press Start 2P';
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 12px rgba(215, 91, 135, 0.4),
+        inset -2px -2px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    animation: pulse-help 2s ease-in-out infinite;
+    z-index: 100;
+}
+
+@keyframes pulse-help {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(215, 91, 135, 0.4);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 
+            0 6px 20px rgba(215, 91, 135, 0.6),
+            0 0 0 10px rgba(215, 91, 135, 0.1);
+    }
+}
+
+.help-button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #ff92b6 0%, #d75b87 100%);
+}
+
+.help-button:active {
+    transform: scale(0.95);
+}
+
+/* Info Panel - Slides in from right */
+.info-panel {
+    position: fixed;
+    right: -450px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    max-height: 80vh;
+    background: #fff5e1;
+    border: 6px solid #8b4560;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.info-panel.visible {
+    right: 30px;
+}
+
+.info-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 4px solid #d4a5a5;
+}
+
+.info-panel-title {
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+    color: #4d1f2f;
+    line-height: 1.8;
+}
+
+.close-info {
+    width: 40px;
+    height: 40px;
+    background: #d75b87;
+    border: 3px solid #8b4560;
+    border-radius: 50%;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.close-info:hover {
+    background: #ff92b6;
+    transform: rotate(90deg);
+}
+
+.info-section {
+    margin-bottom: 25px;
+    opacity: 0;
+    animation: slideInInfo 0.5s ease forwards;
+}
+
+.info-section:nth-child(2) { animation-delay: 0.1s; }
+.info-section:nth-child(3) { animation-delay: 0.2s; }
+.info-section:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes slideInInfo {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.info-label {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #9b7373;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-content {
+    background: rgba(255, 255, 255, 0.6);
+    border: 3px solid #d4a5a5;
+    border-radius: 12px;
+    padding: 18px;
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    line-height: 2;
+    color: #6c3a4d;
+}
+
+.info-highlight {
+    background: #ffe3d8;
+    border: 3px solid #d75b87;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+.info-example {
+    font-size: 10px;
+    color: #4d1f2f;
+    margin-top: 8px;
+}
+
+.info-example strong {
+    color: #d75b87;
+    font-size: 11px;
+}
+
+/* Enhanced result context box */
+.result-context-box {
+    background: linear-gradient(135deg, #fff5e1 0%, #ffe3d8 100%);
+    border: 4px solid #d75b87;
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 25px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.context-header {
+    font-family: 'Press Start 2P';
+    font-size: 13px;
+    color: #4d1f2f;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.context-icon {
+    font-size: 20px;
+}
+
+.context-text {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    line-height: 2.2;
+    color: #6c3a4d;
+}
+
+.context-factors {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 3px solid #d4a5a5;
+}
+
+.factor-item {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border-left: 4px solid #d75b87;
+}
+
+.factor-label {
+    font-family: 'Press Start 2P';
+    font-size: 9px;
+    color: #9b7373;
+    margin-bottom: 5px;
+}
+
+.factor-value {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #4d1f2f;
+}
+
+/* Simplified question box */
+.prediction-question-box.simplified {
+    padding: 25px;
+}
+
+.question-title.concise {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Overlay for info panel */
+.info-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+.info-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .info-panel {
+        width: 90%;
+        right: -100%;
+    }
+    
+    .info-panel.visible {
+        right: 5%;
+    }
+    
+    .help-button {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+}
+
+/* Inline help button - positioned after question */
+.inline-help-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #ffb6c9 0%, #ff92b6 100%);
+    border: 3px solid #d75b87;
+    border-radius: 25px;
+    color: white;
+    font-family: 'Press Start 2P';
+    font-size: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 
+        0 4px 10px rgba(215, 91, 135, 0.3),
+        inset -2px -2px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.inline-help-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 15px rgba(215, 91, 135, 0.5),
+        inset -2px -2px 0 rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #ff92b6 0%, #d75b87 100%);
+}
+
+.inline-help-button:active {
+    transform: translateY(0);
+}
+
+.help-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.help-text {
+    white-space: nowrap;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .inline-help-button {
+        font-size: 9px;
+        padding: 10px 16px;
+    }
+    
+    .help-icon {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economic Mobility Explorer</title>
+
+    <!-- FUN HAND-DRAWN TITLE FONT -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- PIXEL FONT (FOR BUTTON ONLY) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/avatar-builder.css" />
+  </head>
+
+  <body>
+    <div id="pixelBackground"></div>
+
+    <script>
+      // Global error logger to help catch runtime and syntax errors during development
+      window.addEventListener('error', function (e) {
+        console.error('Global error:', e.message, 'file:', e.filename, 'line:', e.lineno, e.error && e.error.stack);
+      });
+      window.addEventListener('unhandledrejection', function (e) {
+        console.error('Unhandled promise rejection:', e.reason);
+      });
+    </script>
+
+    <!-- Scroll Navigation Indicator - RIGHT SIDE -->
+    <div id="scroll-indicator" class="scroll-indicator">
+      <div class="scroll-dot" data-screen="1"></div>    <!-- Landing -->
+      <div class="scroll-dot" data-screen="intro-story"></div>  <!-- Intro Story -->
+      <div class="scroll-dot" data-screen="1-5"></div>  <!-- What is Mobility -->
+      <div class="scroll-dot" data-screen="mountain-intro"></div>  <!-- Mountain Intro -->
+      <div class="scroll-dot" data-screen="6"></div>    <!-- Mountains -->
+      <div class="scroll-dot" data-screen="case-intro"></div>    <!-- Case Intro -->
+      <div class="scroll-dot" data-screen="2"></div>    <!-- Instructions -->
+      <div class="scroll-dot" data-screen="3"></div>    <!-- Meet Case -->
+      <div class="scroll-dot" data-screen="4"></div>    <!-- Prediction -->
+      <div class="scroll-dot" data-screen="8"></div>    <!-- Dashboard (moved here) -->
+      <div class="scroll-dot" data-screen="forces-intro"></div>  <!-- Forces Intro -->
+      <div class="scroll-dot" data-screen="5"></div>    <!-- Avatar Builder -->
+      <div class="scroll-dot" data-screen="closing-reflection"></div>  <!-- Closing Reflection -->
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Screen 1: Landing -->
+    <section id="screen1" class="screen"></section>
+
+    <section id="intro-story" class="screen transition-screen">
+      <!-- This will be rendered by JavaScript -->
+    </section>
+
+    <!-- Screen 2: What is Economic Mobility (was screen1-5) -->
+    <section id="screen1-5" class="screen"></section>
+
+    <!-- Add before screen6 (Mountains) -->
+    <section id="mountain-intro" class="screen transition-screen">
+      <!-- This will be rendered by JavaScript -->
+    </section>
+
+    <!-- Screen 8: Mountains (was screen6) -->
+    <section id="screen6" class="screen"></section>
+
+    <!-- Add before screen2 (Instructions) and screen3 (Meet Case) -->
+    <section id="case-intro" class="screen transition-screen">
+      <!-- This will be rendered by JavaScript -->
+    </section>
+
+    <!-- Screen 3: Instructions (was screen2) -->
+    <section id="screen2" class="screen"></section>
+
+    <!-- Screen 4: Meet Case (was screen3) -->
+    <section id="screen3" class="screen"></section>
+
+    <!-- Screen 5: Prediction (was screen4) -->
+    <section id="screen4" class="screen"></section>
+
+    <!-- Screen 6: Dashboard with TABBED INTERFACE -->
+    <section id="screen8" class="screen">
+      <div class="dashboard-wrapper">
+        <div class="dashboard-header">
+          <h1 class="dashboard-title">EXPLORE AMERICA'S MOBILITY</h1>
+          <p class="dashboard-subtitle">
+            Discover how location, demographics, and opportunity shape economic outcomes across America.
+          </p>
+          
+          <!-- TAB NAVIGATION -->
+          <div class="main-tab-nav">
+            <button class="main-tab active" data-tab="map-view" onclick="switchMainTab('map-view')">
+              ▲ Housing Affordability Map
+            </button>
+            <button class="main-tab" data-tab="data-view" onclick="switchMainTab('data-view')" style="position: relative;">
+              ■ Explore Data By State
+              <span class="help-badge" id="explorer-help-badge" onclick="event.stopPropagation(); MobilityExplorer.toggleInfoPopup();" style="display: none !important;">
+                <span class="help-text">Guide</span>
+              </span>
+            </button>
+            <button class="main-tab" data-tab="trends-view" onclick="switchMainTab('trends-view')">
+              ◆ Mobility Insights
+            </button>
+          </div>
+        </div>
+
+        <!-- TAB 1: MOBILITY MAP (existing content) -->
+        <div id="map-view" class="main-tab-content active">
+          <div class="dashboard-grid" id="dashboard-grid">
+            <!-- Map Panel -->
+            <div class="map-panel" id="map-panel">
+              <div class="map-header">
+                <h2 class="map-title">Housing Affordability by State</h2>
+              </div>
+              
+              <!-- Map container with legend positioned absolutely -->
+              <div style="position: relative;">
+                <svg id="dashboard-map-svg"></svg>
+                
+                <!-- HTML Legend positioned over the map -->
+                <div class="map-legend-overlay">
+                  <div class="legend-labels">
+                    <span class="legend-label-left">Low Mobility</span>
+                    <span class="legend-label-right">High Mobility</span>
+                  </div>
+                  <div class="legend-gradient-bar"></div>
+                  <div class="legend-note">Gray states: Insufficient data</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Insights Panel -->
+            <div class="insights-panel" id="insights-panel">
+              <!-- Placeholder Message (shows before state selected) -->
+              <div class="placeholder-message" id="placeholder-message">
+                <div class="placeholder-icon">👈</div>
+                <div>Click any state on the map to explore detailed insights</div>
+              </div>
+
+              <!-- Dynamic cards container -->
+              <div id="insights-cards-container" style="display: none; flex-direction: column; gap: 30px;">
+                <!-- Card 1: Housing Affordability -->
+                <div class="insight-card" style="margin-bottom: 30px;">
+                  <div class="card-header">
+                    <h3 class="card-title">Housing Affordability Over Time</h3>
+                  </div>
+                  <div class="card-content">
+                    <div id="housing-chart"></div>
+                    <div id="housing-annotation"></div>
+                  </div>
+                </div>
+                
+                <!-- REMOVED: Card 2 - Mobility Outcomes by Race
+                <div class="insight-card" style="margin-bottom: 30px;">
+                  <div class="card-header">
+                    <h3 class="card-title">Mobility Outcomes by Race</h3>
+                  </div>
+                  <div class="card-content">
+                    <div id="mobility-bars"></div>
+                  </div>
+                </div>
+                -->
+                
+                <!-- REMOVED: Card 3 - Key Opportunity Factors
+                <div class="insight-card">
+                  <div class="card-header">
+                    <h3 class="card-title">Key Opportunity Factors</h3>
+                    <div class="factors-tabs">
+                      <button class="factors-tab active" data-view="factors" onclick="CoordinatedDashboard.switchFactorsView('factors')">■ Key Metrics</button>
+                      <button class="factors-tab" data-view="correlations" onclick="CoordinatedDashboard.switchFactorsView('correlations')">📈 Correlations</button>
+                    </div>
+                  </div>
+                  <div class="card-content">
+                    <div id="factors-grid" class="factors-grid"></div>
+                    <div id="correlations-grid" class="correlations-grid" style="display: none;"></div>
+                  </div>
+                </div>
+                -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: EXPLORE DATA STATE -->
+        <div id="data-view" class="main-tab-content">
+          <div id="explorerContainer"></div>
+        </div>
+
+        <!-- TAB 3: MOBILITY VISUALIZATION LAB -->
+        <div id="trends-view" class="main-tab-content">
+          <div class="viz-lab-grid">
+
+            <!-- VISUALIZATION 1: SANKEY DIAGRAM -->
+            <section id="viz1" class="viz-section">
+              <h2 style="color: #4d1f2f; display: flex; align-items: center; margin-bottom: 20px;">
+                <span class="viz-number">1</span>
+                Following the Flow: Where Different Paths Lead
+              </h2>
+              
+              <!-- KEY INSIGHT BOX -->
+              <div class="key-insight-box">
+                <div class="insight-icon-large">💡</div>
+                <div class="key-insight-content">
+                  <h3>Key Finding</h3>
+                  <p>Among children from low-income families (25th percentile), those in high-education communities achieve 8-12 percentile points higher mobility than those in low-education areas—regardless of race or poverty level. Education isn't just correlated with mobility; it's the strongest lever we can see in the data.</p>
+                </div>
+              </div>
+              
+              <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px; color: #2c2c2c;">
+                <strong>How to read this visualization:</strong> Follow the colored flows from left to right. Start with a poverty level (left column), trace through racial composition (middle), and end at education level (right). Flow thickness shows population size—thicker means more census tracts. Flow color indicates the average adult income rank (percentile) for children who grew up in those areas: red for lower mobility, orange for middle, green for higher.
+              </p>
+              
+              <div id="sankey-viz-container"></div>
+            </section>
+
+            <!-- VISUALIZATION 2: HEATMAP -->
+            <section id="viz2" class="viz-section">
+              <h2 style="color: #4d1f2f; display: flex; align-items: center; margin-bottom: 20px;">
+                <span class="viz-number">2</span>
+                What Connects to What: The Web of Factors
+              </h2>
+              
+              <!-- KEY INSIGHT BOX -->
+              <div class="key-insight-box">
+                <div class="insight-icon-large">💡</div>
+                <div class="key-insight-content">
+                  <h3>Key Finding</h3>
+                  <p>College education rate has a +0.73 correlation with mobility—the strongest relationship in this analysis. By comparison, poverty rate shows -0.68 (strong negative), while factors like commute time barely matter (+0.12). If you want to predict a community's mobility outcomes, look at college graduation rates first.</p>
+                </div>
+              </div>
+              
+              <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px; color: #2c2c2c;">
+                <strong>How to read this visualization:</strong> Each cell shows how strongly two factors move together, from -1.00 (perfect opposite relationship) to +1.00 (perfect same-direction relationship). Darker colors mean stronger relationships. Hover over any cell to see the exact correlation number. Look for the darkest cells to find the most powerful connections.
+              </p>
+              
+              <div id="heatmap-viz-container"></div>
+            </section>
+
+            <!-- VISUALIZATION 3: TREEMAP -->
+            <section id="viz3" class="viz-section">
+              <h2 style="color: #4d1f2f; display: flex; align-items: center; margin-bottom: 20px;">
+                <span class="viz-number">3</span>
+                Mapping Communities: Six Americas
+              </h2>
+              
+              <!-- KEY INSIGHT BOX -->
+              <div class="key-insight-box">
+                <div class="insight-icon-large">💡</div>
+                <div class="key-insight-content">
+                  <h3>Key Finding</h3>
+                  <p>The "Affluent-Educated" segment (low poverty + high college rates) shows average household incomes of $95k+ and mobility scores in the 48th percentile. The "High Poverty-Low Education" segment averages $32k income with 38th percentile mobility. That's a 60% income gap and 10-point mobility difference—showing how advantages and disadvantages compound when poverty and education align.</p>
+                </div>
+              </div>
+              
+              <p style="font-size: 16px; line-height: 1.6; margin-bottom: 25px; color: #2c2c2c;">
+                <strong>How to read this visualization:</strong> Each box represents a type of community based on poverty and education levels. Larger boxes contain more census tracts (more Americans live there). Box color shows average household income—darker browns indicate lower incomes, lighter greens show higher incomes. Click or hover on any box to see detailed statistics for that community type.
+              </p>
+              
+              <div id="treemap-viz-container"></div>
+            </section>
+
+            <!-- SUMMARY SECTION -->
+            <div class="viz-summary">
+              <h2>Three Things This Data Reveals</h2>
+              
+              <div class="summary-cards">
+                <div class="summary-card">
+                  <div class="summary-number">1</div>
+                  <h3>Education Opens Doors</h3>
+                  <p>Across every visualization, college education emerges as the most powerful lever for mobility. It's not a guarantee, but it consistently improves the odds.</p>
+                </div>
+                
+                <div class="summary-card">
+                  <div class="summary-number">2</div>
+                  <h3>Place Shapes Possibility</h3>
+                  <p>Your starting point matters. Communities create different opportunity structures through their mix of resources, education, and economic characteristics.</p>
+                </div>
+                
+                <div class="summary-card">
+                  <div class="summary-number">3</div>
+                  <h3>Gaps Persist</h3>
+                  <p>Even accounting for poverty and education, racial disparities in mobility remain visible in the data—pointing to barriers beyond these measured factors.</p>
+                </div>
+              </div>
+              
+              <div class="summary-cta">
+                <p style="font-size: 16px; margin-top: 20px; opacity: 0.95;">
+                  These patterns aren't destiny, but they reveal how where you start influences where you can go. Understanding these connections is the first step toward creating more equitable pathways.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add before screen5 (Avatar Builder) -->
+    <section id="forces-intro" class="screen transition-screen">
+      <!-- This will be rendered by JavaScript -->
+    </section>
+
+    <!-- Screen 7: Avatar Builder (was screen5) -->
+    <section id="screen5" class="screen"></section>
+
+    <!-- Screen 9: Mountain Climb Visualization (NEW) -->
+    <section id="screen9" class="screen" style="display: none;">
+      <div id="mountainClimbContainer"></div>
+    </section>
+
+    <!-- Add at the very end -->
+    <section id="closing-reflection" class="screen transition-screen">
+      <!-- This will be rendered by JavaScript -->
+    </section>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <!-- PapaParse for CSV parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+
+    <!-- Plotly.js for visualizations -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <!-- Your scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/prediction.js"></script>
+    <script src="js/avatar-integration.js"></script>
+    <script src="js/mountains.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/mobility-explorer.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/mountain-climb.js"></script>
+    <script src="js/viz-loader.js"></script>
+
+    <script>
+      // Tab switching function
+      function switchMainTab(tabId) {
+        // Update tab buttons
+        document.querySelectorAll('.main-tab').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.tab === tabId);
+        });
+        
+        // Update tab content
+        document.querySelectorAll('.main-tab-content').forEach(content => {
+          content.classList.toggle('active', content.id === tabId);
+        });
+        
+        // Show/hide help badge on Explore Data By State tab
+        const helpBadge = document.getElementById('explorer-help-badge');
+        console.log('Badge element:', helpBadge);
+        console.log('Tab ID:', tabId);
+        if (helpBadge) {
+          const shouldShow = tabId === 'data-view';
+          // Use setProperty with important flag to override inline styles
+          helpBadge.style.setProperty('display', shouldShow ? 'flex' : 'none', 'important');
+          console.log('Badge display set to:', shouldShow ? 'flex' : 'none');
+        }
+        
+        // Initialize explorer if switching to data view
+        if (tabId === 'data-view' && typeof MobilityExplorer !== 'undefined') {
+          MobilityExplorer.init();
+        }
+        
+        // Initialize visualizations if switching to trends view (Tab 3)
+        if (tabId === 'trends-view' && typeof initializeVisualizations === 'function') {
+          initializeVisualizations();
+        }
+      }
+      
+      // Initialize badge visibility on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        const helpBadge = document.getElementById('explorer-help-badge');
+        if (helpBadge) {
+          // Check which tab is initially active
+          const activeTab = document.querySelector('.main-tab.active');
+          const shouldShow = activeTab && activeTab.dataset.tab === 'data-view';
+          // Use setProperty with important flag to override inline styles
+          helpBadge.style.setProperty('display', shouldShow ? 'flex' : 'none', 'important');
+          console.log('Initial page load - Badge display:', shouldShow ? 'flex' : 'none');
+        }
+      });
+    </script>
+  </body>
+</html>

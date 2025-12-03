@@ -1,0 +1,228 @@
+/* Screen Background */
+#screen1-5 {
+    background: #B0B8A1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Fade In */
+.fade-in-section {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Main title styling - BIGGER */
+.mobility-title {
+    font-family: 'Press Start 2P';
+    font-size: 24px !important;
+    line-height: 2 !important;
+    color: #4d1f2f !important;
+    margin-bottom: 30px !important;
+    text-align: center !important;
+}
+
+/* Definition text - BIGGER - FULL WIDTH */
+.mobility-definition-text {
+    font-family: 'Press Start 2P';
+    font-size: 18px !important;
+    line-height: 2.2 !important;
+    color: #4d1f2f !important;
+    margin: 0 auto 50px auto !important;
+    text-align: center !important;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+/* Example text - NO BOX, just styled text - FULL WIDTH */
+.mobility-example-text {
+    font-family: 'Press Start 2P';
+    font-size: 14px !important;
+    line-height: 2.2 !important;
+    color: #6c3a4d !important;
+    margin: 0 auto 60px auto !important;
+    text-align: center !important;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+
+.mobility-example-text strong {
+    color: #4d1f2f;
+}
+
+.mobility-example-text .highlight {
+    color: #d75b87;
+    font-weight: bold;
+}
+
+/* Factors section title - CENTERED ABOVE CARDS */
+.factors-section-title {
+    font-family: 'Press Start 2P';
+    font-size: 20px !important;
+    color: #8b4560 !important;
+    text-align: center !important;
+    margin: 0 0 40px 0 !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Factors grid container - CARDS GO BELOW TITLE */
+.factors-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Single row layout for 6 factors - CENTERED */
+.factor-cards-horizontal {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+.factor-card-h {
+    background: #fff5e1;
+    border: 4px solid #8b4560;
+    border-radius: 12px;
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 
+        inset -4px -4px 0 #ffffff66,
+        inset 4px 4px 0 #00000055;
+    opacity: 0;
+    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    width: 100%;
+}
+
+.factor-card-h:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000088,
+        0 8px 16px rgba(139, 69, 96, 0.3);
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+    70% { transform: scale(1.05) translateY(-5px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.factor-svg {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+    animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.factor-title-h {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    color: #8b4560;
+    margin-bottom: 10px;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.factor-desc-h {
+    font-family: 'Press Start 2P';
+    font-size: 8px;
+    color: #6c3a4d;
+    line-height: 1.8;
+}
+
+.mobility-text-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .factor-cards-horizontal {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .factor-card-h {
+        padding: 30px 20px;
+    }
+    
+    .factor-svg {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .factor-title-h {
+        font-size: 12px;
+    }
+    
+    .factor-desc-h {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 900px) {
+    .factor-cards-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .mobility-title {
+        font-size: 18px !important;
+    }
+    
+    .mobility-definition-text {
+        font-size: 14px !important;
+    }
+    
+    .mobility-example-text {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .factor-cards-horizontal {
+        grid-template-columns: 1fr;
+    }
+    
+    .mobility-title {
+        font-size: 16px !important;
+    }
+    
+    .mobility-definition-text {
+        font-size: 12px !important;
+    }
+}

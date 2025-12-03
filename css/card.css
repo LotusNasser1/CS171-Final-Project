@@ -1,0 +1,438 @@
+/* Simplified Base Card */
+.pixel-id-card.simple {
+    width: 98%;
+    max-width: 980px;
+    margin: 50px auto;
+    padding: 0;
+    background: #fff5e1;
+    border: 8px solid #000;
+    box-shadow: 0px 0px 0px 6px #000;
+    position: relative;
+}
+
+.pixel-id-header {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 0;
+    background: #ffb6c9;
+    border: 4px solid #8b4560;
+    border-bottom: none;
+    box-shadow: inset -4px -4px 0 #ffffff88, inset 4px 4px 0 #00000055;
+}
+
+.pixel-id-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 20px;
+    color: #4d1f2f;
+    letter-spacing: 2px;
+}
+
+.pixel-id-body.simple {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    padding: 40px 45px;
+    background: #fff5e1;
+}
+
+.pixel-id-photo.large {
+    width: 220px;
+    height: 260px;
+    flex-shrink: 0;
+    background-color: #ffe3d8;
+    border: 4px solid #000;
+    image-rendering: pixelated;
+    box-shadow: inset -4px -4px 0 #ffffff88, inset 4px 4px 0 #00000055;
+}
+
+.pixel-id-fields.minimal {
+    flex: 1;
+}
+
+.pixel-row.large {
+    font-size: 18px;
+    padding: 14px 0;
+    color: #6c3a4d;
+    border-bottom: 2px solid #d7b8c3;
+    line-height: 1.6;
+}
+
+.pixel-row.large b {
+    color: #4d1f2f;
+    display: inline-block;
+    min-width: 210px;
+    font-family: 'Press Start 2P', monospace;
+}
+
+/* Button Container */
+.card-button-container {
+    text-align: center;
+    padding: 30px 0;
+    background: #fff5e1;
+}
+
+/* Pixel ID Button Large */
+.pixel-id-button-large {
+    display: inline-block;
+    padding: 20px 40px;
+    font-size: 16px;
+    font-family: 'Press Start 2P', monospace;
+    background: #ffb6c9;
+    border: 4px solid #8b4560;
+    color: #4d1f2f;
+    cursor: pointer;
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88, 
+        inset 4px 4px 0 #00000055,
+        0 6px 0 #6c3a4d;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pixel-id-button-large:hover {
+    background: #ff92b6;
+    transform: translateY(-3px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 9px 0 #6c3a4d;
+}
+
+.pixel-id-button-large:active {
+    transform: translateY(3px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 3px 0 #6c3a4d;
+}
+
+/* Interactive Context Nodes */
+.context-prompt {
+    position: absolute;
+    top: 80px;
+    right: 30px;
+    width: 110px;
+    height: 110px;
+    background: #d75b87;
+    border-radius: 50%;
+    border: 5px solid #8b4560;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 
+        0 6px 20px rgba(215, 91, 135, 0.4),
+        inset -3px -3px 0 #ffffff33,
+        inset 3px 3px 0 #00000033;
+    transition: all 0.3s ease;
+    animation: pulsePrompt 2s ease-in-out infinite;
+    z-index: 20;
+}
+
+.context-prompt:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 8px 25px rgba(215, 91, 135, 0.6),
+        inset -3px -3px 0 #ffffff33,
+        inset 3px 3px 0 #00000033;
+}
+
+.context-prompt-text {
+    font-family: 'Press Start 2P';
+    font-size: 9px;
+    color: white;
+    text-align: center;
+    line-height: 1.5;
+    padding: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes pulsePrompt {
+    0%, 100% {
+        box-shadow: 
+            0 6px 20px rgba(215, 91, 135, 0.4),
+            inset -3px -3px 0 #ffffff33,
+            inset 3px 3px 0 #00000033;
+    }
+    50% {
+        box-shadow: 
+            0 6px 30px rgba(215, 91, 135, 0.8),
+            0 0 0 8px rgba(215, 91, 135, 0.2),
+            inset -3px -3px 0 #ffffff33,
+            inset 3px 3px 0 #00000033;
+    }
+}
+
+/* Context Exploration Mode */
+.pixel-id-card.exploration-mode {
+    position: relative;
+}
+
+.context-node {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background: #ffb6c9;
+    border: 4px solid #8b4560;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 
+        0 4px 12px rgba(139, 69, 96, 0.3),
+        inset -2px -2px 0 #ffffff66,
+        inset 2px 2px 0 #00000055;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.context-node.active {
+    animation: nodeAppear 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.context-node:hover {
+    transform: scale(1.15);
+    background: #ff92b6;
+    box-shadow: 
+        0 6px 18px rgba(139, 69, 96, 0.5),
+        inset -2px -2px 0 #ffffff88,
+        inset 2px 2px 0 #00000088;
+}
+
+@keyframes nodeAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    60% {
+        transform: scale(1.15);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Connecting Lines */
+.context-line {
+    position: absolute;
+    height: 3px;
+    background: linear-gradient(90deg, #d4a5a5, transparent);
+    transform-origin: left center;
+    z-index: 5;
+    opacity: 0;
+    animation: lineGrow 0.6s ease-out forwards;
+}
+
+@keyframes lineGrow {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 100%;
+        opacity: 0.5;
+    }
+}
+
+/* Context Panel */
+.context-panel {
+    position: fixed;
+    right: -500px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 450px;
+    max-height: 80vh;
+    background: #fff5e1;
+    border: 6px solid #8b4560;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset -4px -4px 0 #ffffff66,
+        inset 4px 4px 0 #00000055;
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow-y: auto;
+}
+
+.context-panel.visible {
+    right: 40px;
+}
+
+.context-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #d4a5a5;
+}
+
+.context-panel-title {
+    font-family: 'Press Start 2P';
+    font-size: 13px;
+    color: #4d1f2f;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.close-panel {
+    width: 35px;
+    height: 35px;
+    background: #d75b87;
+    border: 3px solid #8b4560;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: inset -2px -2px 0 #ffffff66, inset 2px 2px 0 #00000055;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+}
+
+.close-panel:hover {
+    background: #ff92b6;
+    transform: rotate(90deg);
+}
+
+.context-panel-content {
+    font-family: 'Press Start 2P';
+    font-size: 11px;
+    line-height: 2;
+    color: #6c3a4d;
+}
+
+.context-insight-box {
+    background: #ffe3d8;
+    border: 4px solid #d75b87;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: inset -3px -3px 0 #ffffff88, inset 3px 3px 0 #00000055;
+}
+
+.context-data-point {
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid #d4a5a5;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px 0;
+}
+
+.context-data-label {
+    font-size: 9px;
+    color: #9b7373;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.context-data-value {
+    font-size: 12px;
+    color: #4d1f2f;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .pixel-id-body.simple {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .context-prompt {
+        top: 15px;
+        right: 15px;
+        width: 90px;
+        height: 90px;
+    }
+    
+    .context-prompt-text {
+        font-size: 8px;
+    }
+    
+    .context-panel {
+        width: 90%;
+        right: -100%;
+    }
+    
+    .context-panel.visible {
+        right: 5%;
+    }
+    
+    .pixel-row.large {
+        font-size: 15px;
+    }
+    
+    .pixel-row.large b {
+        min-width: 160px;
+    }
+}
+
+/* Button Group for Case Screen */
+.case-button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 30px 0;
+    background: #fff5e1;
+    flex-wrap: wrap;
+}
+
+/* Secondary Button Style */
+.pixel-id-button-large.secondary-button {
+    background: #B0B8A1;
+    border-color: #8b4560;
+    color: #4d1f2f;
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88, 
+        inset 4px 4px 0 #00000055,
+        0 6px 0 #7A5C5C;
+}
+
+.pixel-id-button-large.secondary-button:hover {
+    background: #9b9d8a;
+    transform: translateY(-3px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 9px 0 #7A5C5C;
+}
+
+.pixel-id-button-large.secondary-button:active {
+    transform: translateY(3px);
+    box-shadow: 
+        inset -4px -4px 0 #ffffff88,
+        inset 4px 4px 0 #00000055,
+        0 3px 0 #7A5C5C;
+}
+
+/* Add transition for smooth updates */
+#case-card {
+    transition: opacity 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .case-button-group {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .pixel-id-button-large {
+        width: 100%;
+    }
+}

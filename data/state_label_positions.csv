@@ -1,0 +1,52 @@
+state_id,state_abbr,state_name,label_x,label_y
+1,AL,Alabama,660,410
+2,AK,Alaska,140,570
+4,AZ,Arizona,200,380
+5,AR,Arkansas,570,400
+6,CA,California,120,330
+8,CO,Colorado,340,340
+9,CT,Connecticut,870,280
+10,DE,Delaware,850,310
+11,DC,District of Columbia,840,320
+12,FL,Florida,750,500
+13,GA,Georgia,720,430
+15,HI,Hawaii,300,560
+16,ID,Idaho,220,220
+17,IL,Illinois,610,330
+18,IN,Indiana,660,330
+19,IA,Iowa,560,290
+20,KS,Kansas,480,360
+21,KY,Kentucky,680,370
+22,LA,Louisiana,590,460
+23,ME,Maine,895,210
+24,MD,Maryland,830,320
+25,MA,Massachusetts,890,260
+26,MI,Michigan,680,270
+27,MN,Minnesota,540,230
+28,MS,Mississippi,620,430
+29,MO,Missouri,570,350
+30,MT,Montana,310,200
+31,NE,Nebraska,460,310
+32,NV,Nevada,180,310
+33,NH,New Hampshire,880,240
+34,NJ,New Jersey,850,300
+35,NM,New Mexico,310,400
+36,NY,New York,820,260
+37,NC,North Carolina,770,390
+38,ND,North Dakota,450,210
+39,OH,Ohio,710,320
+40,OK,Oklahoma,510,400
+41,OR,Oregon,140,240
+42,PA,Pennsylvania,800,300
+44,RI,Rhode Island,895,275
+45,SC,South Carolina,760,420
+46,SD,South Dakota,450,250
+47,TN,Tennessee,660,390
+48,TX,Texas,450,450
+49,UT,Utah,260,320
+50,VT,Vermont,865,230
+51,VA,Virginia,780,360
+53,WA,Washington,180,190
+54,WV,West Virginia,750,350
+55,WI,Wisconsin,600,250
+56,WY,Wyoming,330,280

@@ -1,0 +1,208 @@
+/* Global Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    /* Removed scroll-behavior: smooth to improve performance */
+    /* Smooth scrolling is handled by scrollIntoView({ behavior: "smooth" }) */
+}
+
+.screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    /* Performance optimizations */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Screen Backgrounds */
+#screen1 {
+    background: url('../asset/background_img.png') center/cover;
+    position: relative;
+}
+
+#screen2 { background: #B0B8A1; zoom: 0.85; }
+#screen3 { background: #B0B8A1; zoom: 0.85; }
+#screen4 { background: #B0B8A1; }
+#screen5 { background: #B0B8A1; zoom: 0.85; }
+#screen6 { background: #B0B8A1;  }
+/* Typography */
+h1 { font-size: 3rem; margin-bottom: 1rem; text-align: center; }
+h2 { font-size: 2.4rem; margin-bottom: 1.5rem; text-align: center; }
+h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Pixel Background */
+#pixelBackground {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+    /* Performance optimizations */
+    will-change: auto;
+    transform: translateZ(0);
+}
+
+.pixel-runner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: runAcross 12s linear infinite;
+    /* GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.floating-shape {
+    position: absolute;
+    pointer-events: none;
+    animation: floatDown 12s linear infinite;
+    font-weight: bold;
+    /* GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+@keyframes runAcross {
+    0%   { transform: translateX(-100px); }
+    100% { transform: translateX(calc(100vw + 100px)); }
+}
+
+@keyframes floatDown {
+    0% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Scroll Navigation Indicator */
+.scroll-indicator {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.scroll-dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(77, 31, 47, 0.3);
+    border: 2px solid #4d1f2f;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-dot:hover {
+    background: rgba(77, 31, 47, 0.5);
+    transform: scale(1.2);
+}
+
+.scroll-dot.active {
+    background: #d75b87;
+    width: 16px;
+    height: 16px;
+    border-color: #8b4560;
+    box-shadow: 
+        0 0 0 4px rgba(215, 91, 135, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
+        box-shadow: 
+            0 0 0 4px rgba(215, 91, 135, 0.3),
+            0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 0 0 8px rgba(215, 91, 135, 0.2),
+            0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Add pixel corners to active dot */
+.scroll-dot.active::before,
+.scroll-dot.active::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #d75b87;
+}
+
+.scroll-dot.active::before {
+    top: -2px;
+    left: -2px;
+}
+
+.scroll-dot.active::after {
+    bottom: -2px;
+    right: -2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .scroll-indicator {
+        right: 15px;
+        gap: 15px;
+    }
+    
+    .scroll-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .scroll-dot.active {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Hide on very small screens */
+@media (max-width: 480px) {
+    .scroll-indicator {
+        display: none;
+    }
+}
